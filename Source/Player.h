@@ -2,6 +2,10 @@
 
 #include <GameObject.h>
 
+class CBoxCollider;
+class CInputComponent;
+class CSpriteRenderer;
+
 class Player : public CGameObject
 {
 public:
@@ -19,13 +23,13 @@ private:
 	void OnJump();
 	void OnJumpStopped();
 
-	float MovementSpeed = 100.f; // 4
-	float MoveRigthtForce = 0.f; // 4
-	float MoveLeftForce = 0.f;	 // 4
+	float mMovementSpeed = 100.f; // 4
+	float mMoveRigthtForce = 0.f; // 4
+	float mMoveLeftForce = 0.f;	 // 4
 
 private:
-	class CInputComponent* Input; // 4 / 8
-	class CSpriteRenderer* Sprite;// 4 / 8
-	class CBoxCollider* Collider; // 4 / 8
+	CInputComponent* mInput; // 4 / 8
+	CSpriteRenderer* mSprite;// 4 / 8
+	CBoxCollider* mCollider; // 4 / 8
 	
 };
