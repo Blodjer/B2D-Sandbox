@@ -1,12 +1,12 @@
 #include "Core/GameEngine.h"
 #include "Core/GameInstance.h"
-#include "Debug/Debug.h"
 #include "TestScene.h"
 
 #include <eh.h>
 #include <iostream>
 #include <Windows.h>
 
+#if _DEBUG
 LONG WINAPI MyUnhandledExceptionFilter(PEXCEPTION_POINTERS pExceptionPtrs)
 {
 	static char msg[256];
@@ -17,10 +17,13 @@ LONG WINAPI MyUnhandledExceptionFilter(PEXCEPTION_POINTERS pExceptionPtrs)
 	getchar();
 	return EXCEPTION_EXECUTE_HANDLER;
 }
+#endif
 
 int main(int argc, const char*[])
 {
+#if _DEBUG
 	SetUnhandledExceptionFilter(MyUnhandledExceptionFilter);
+#endif
 
 	auto engine = CGameEngine::Init();
 

@@ -2,7 +2,6 @@
 
 #include "Component/BoxCollider.h"
 #include "Component/SpriteRenderer.h"
-#include "Debug/Debug.h"
 #include "Math/BMath.h"
 #include "Player.h"
 
