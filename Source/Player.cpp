@@ -1,12 +1,13 @@
 #include "Player.h"
-#include "GameInstance.h"
-#include "PlayerController.h"
-#include "InputComponent.h"
-#include "SpriteRenderer.h"
-#include "BoxCollider.h"
-#include "BMath.h"
+
+#include "Component/BoxCollider.h"
+#include "Component/InputComponent.h"
+#include "Component/SpriteRenderer.h"
+#include "Core/GameInstance.h"
+#include "Debug/Debug.h"
 #include "Input.h"
-#include "Debug.h"
+#include "Math/BMath.h"
+#include "PlayerController.h"
 
 // Derive from actor instead of GameObject
 // Actor should hold reference to its components but cannot be reused on another GameObject

@@ -1,11 +1,13 @@
 #include "TestScene.h"
-#include <chrono>
+
+#include "Component/BoxCollider.h"
+#include "Component/SpriteRenderer.h"
+#include "Debug/Debug.h"
+#include "Math/BMath.h"
 #include "Player.h"
-#include <SpriteRenderer.h>
+
+#include <chrono>
 #include <iostream>
-#include "BMath.h"
-#include "BoxCollider.h"
-#include "Debug.h"
 
 TestScene::TestScene()
 {

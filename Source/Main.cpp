@@ -1,10 +1,11 @@
-#include "GameEngine.h"
-#include "GameInstance.h"
+#include "Core/GameEngine.h"
+#include "Core/GameInstance.h"
+#include "Debug/Debug.h"
 #include "TestScene.h"
-#include <windows.h>
-#include <iostream>
+
 #include <eh.h>
-#include "Debug.h"
+#include <iostream>
+#include <Windows.h>
 
 LONG WINAPI MyUnhandledExceptionFilter(PEXCEPTION_POINTERS pExceptionPtrs)
 {
