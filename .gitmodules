@@ -1,0 +1,3 @@
+[submodule "B2D"]
+	path = B2D
+	url = https://github.com/Blodjer/B2D.git
