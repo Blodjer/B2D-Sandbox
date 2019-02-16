@@ -5,7 +5,6 @@
 #include "Component/SpriteRenderer.h"
 #include "Core/GameInstance.h"
 #include "Input.h"
-#include "Math/BMath.h"
 #include "PlayerController.h"
 
 // Derive from actor instead of GameObject
@@ -18,12 +17,12 @@ Player::Player()
 
 	mInput = AddComponent<CInputComponent>();
 	mInput->BindController(controller);
-	mInput->BindKey(65, EKeyEvent::KEY_DOWN, TKeyDelegate::Create(&Player::OnMoveLeft));
-	mInput->BindKey(65, EKeyEvent::KEY_UP, TKeyDelegate::Create(&Player::OnMoveLeftStopped));
-	mInput->BindKey(68, EKeyEvent::KEY_DOWN, TKeyDelegate::Create(&Player::OnMoveRight));
-	mInput->BindKey(68, EKeyEvent::KEY_UP, TKeyDelegate::Create(&Player::OnMoveRightStopped));
-	mInput->BindKey(32, EKeyEvent::KEY_DOWN, TKeyDelegate::Create(&Player::OnJump));
-	mInput->BindKey(32, EKeyEvent::KEY_UP, TKeyDelegate::Create(&Player::OnJumpStopped));
+	mInput->BindKey(EKey::A, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveLeft));
+	mInput->BindKey(EKey::A, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveLeftStopped));
+	mInput->BindKey(EKey::D, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveRight));
+	mInput->BindKey(EKey::D, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveRightStopped));
+	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnJump));
+	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnJumpStopped));
 	
 	mSprite = AddComponent<CSpriteRenderer>();
 	mSprite->SetSprite("Content/Sprites/norm.png");
@@ -41,7 +40,7 @@ void Player::Update(float deltaTime)
 {
 	CGameObject::Update(deltaTime);
 
-	SVector2 position = GetPosition();
+	TVec2 position = GetPosition();
 	position.X += (mMoveRigthtForce - mMoveLeftForce) * mMovementSpeed * deltaTime;
 	SetPosition(position, true);
 }
@@ -68,7 +67,7 @@ void Player::OnMoveLeftStopped()
 
 void Player::OnJump()
 {
-	SVector2 position = GetPosition();
+	TVec2 position = GetPosition();
 	position.Y -= 50;
 	SetPosition(position, true);
 	
@@ -77,7 +76,7 @@ void Player::OnJump()
 
 void Player::OnJumpStopped()
 {
-	SVector2 position = GetPosition();
+	TVec2 position = GetPosition();
 	position.Y += 50;
 	SetPosition(position, true);
 }

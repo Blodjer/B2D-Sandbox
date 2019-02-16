@@ -2,7 +2,6 @@
 
 #include "Component/BoxCollider.h"
 #include "Component/SpriteRenderer.h"
-#include "Math/BMath.h"
 #include "Player.h"
 
 #include <chrono>
@@ -10,9 +9,9 @@
 
 TestScene::TestScene()
 {
-	Player* player = SpawnGameObject<Player>(SVector2(200, 400));
+	Player* player = SpawnGameObject<Player>(TVec2(200, 400));
 
-	CGameObject* gameObject = SpawnGameObject(SVector2(500, 600));
+	CGameObject* gameObject = SpawnGameObject(TVec2(500, 600));
 	CBoxCollider* collider = gameObject->AddComponent<CBoxCollider>();
 	collider->SetSize(600, 100);
 
