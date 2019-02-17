@@ -7,6 +7,8 @@ workspace "B2D-Sandbox"
 	targetdir "Bin/%{cfg.buildcfg}/%{cfg.system}-%{cfg.architecture}"
 	objdir "Tmp/%{cfg.buildcfg}/%{cfg.system}-%{cfg.architecture}/%{prj.name}"
 
+	flags { "MultiProcessorCompile" }
+
 	configurations
 	{
 		"Debug",
@@ -34,7 +36,7 @@ workspace "B2D-Sandbox"
 	filter "platforms:Win64"
 		system "Windows"
 		architecture "x64"
-
+	
 	include "B2D"
 
 project "Sandbox"
@@ -50,7 +52,7 @@ project "Sandbox"
 	includedirs
 	{
 		"B2D/Source/",
-		"B2D/Include/"
+		"B2D/Libraries/glm/"
 	}
 
 	links

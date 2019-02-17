@@ -5,6 +5,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Sandbox", "Sandbox\Sandbox.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "B2D", "B2D\B2D.vcxproj", "{5DD2870B-C9DB-877C-5257-9E7CBE5F937C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libraries", "Libraries", "{49CDA3BE-B558-1183-BE69-94772A746D83}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GLFW", "B2D\Libraries\GLFW\GLFW.vcxproj", "{154B857C-0182-860D-AA6E-6C109684020F}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glew", "B2D\Libraries\glew\glew.vcxproj", "{7463977C-609A-980D-0987-7E10F59C140F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -29,8 +35,28 @@ Global
 		{5DD2870B-C9DB-877C-5257-9E7CBE5F937C}.Release|Win32.Build.0 = Release|Win32
 		{5DD2870B-C9DB-877C-5257-9E7CBE5F937C}.Release|Win64.ActiveCfg = Release Win64|x64
 		{5DD2870B-C9DB-877C-5257-9E7CBE5F937C}.Release|Win64.Build.0 = Release Win64|x64
+		{154B857C-0182-860D-AA6E-6C109684020F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{154B857C-0182-860D-AA6E-6C109684020F}.Debug|Win32.Build.0 = Debug|Win32
+		{154B857C-0182-860D-AA6E-6C109684020F}.Debug|Win64.ActiveCfg = Debug Win64|x64
+		{154B857C-0182-860D-AA6E-6C109684020F}.Debug|Win64.Build.0 = Debug Win64|x64
+		{154B857C-0182-860D-AA6E-6C109684020F}.Release|Win32.ActiveCfg = Release|Win32
+		{154B857C-0182-860D-AA6E-6C109684020F}.Release|Win32.Build.0 = Release|Win32
+		{154B857C-0182-860D-AA6E-6C109684020F}.Release|Win64.ActiveCfg = Release Win64|x64
+		{154B857C-0182-860D-AA6E-6C109684020F}.Release|Win64.Build.0 = Release Win64|x64
+		{7463977C-609A-980D-0987-7E10F59C140F}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7463977C-609A-980D-0987-7E10F59C140F}.Debug|Win32.Build.0 = Debug|Win32
+		{7463977C-609A-980D-0987-7E10F59C140F}.Debug|Win64.ActiveCfg = Debug Win64|x64
+		{7463977C-609A-980D-0987-7E10F59C140F}.Debug|Win64.Build.0 = Debug Win64|x64
+		{7463977C-609A-980D-0987-7E10F59C140F}.Release|Win32.ActiveCfg = Release|Win32
+		{7463977C-609A-980D-0987-7E10F59C140F}.Release|Win32.Build.0 = Release|Win32
+		{7463977C-609A-980D-0987-7E10F59C140F}.Release|Win64.ActiveCfg = Release Win64|x64
+		{7463977C-609A-980D-0987-7E10F59C140F}.Release|Win64.Build.0 = Release Win64|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{154B857C-0182-860D-AA6E-6C109684020F} = {49CDA3BE-B558-1183-BE69-94772A746D83}
+		{7463977C-609A-980D-0987-7E10F59C140F} = {49CDA3BE-B558-1183-BE69-94772A746D83}
 	EndGlobalSection
 EndGlobal
