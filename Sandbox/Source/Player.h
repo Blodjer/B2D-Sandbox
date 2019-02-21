@@ -4,7 +4,7 @@
 
 class CBoxCollider;
 class CInputComponent;
-class CSpriteRenderer;
+class CComplexSpriteRenderer;
 
 class Player : public CGameObject
 {
@@ -29,7 +29,7 @@ private:
 
 private:
 	CInputComponent* mInput; // 4 / 8
-	CSpriteRenderer* mSprite;// 4 / 8
+	CComplexSpriteRenderer* mSprite;// 4 / 8
 	CBoxCollider* mCollider; // 4 / 8
 	
 };

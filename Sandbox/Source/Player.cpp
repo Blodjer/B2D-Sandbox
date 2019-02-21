@@ -2,7 +2,11 @@
 
 #include "Component/BoxCollider.h"
 #include "Component/InputComponent.h"
+#include "Component/ComplexSpriteRenderer.h"
 #include "Component/SpriteRenderer.h"
+#include "Graphics/Shader.h"
+#include "Graphics/Material.h"
+#include "Graphics/Texture.h"
 #include "Core/GameInstance.h"
 #include "Input.h"
 #include "PlayerController.h"
@@ -19,13 +23,25 @@ Player::Player()
 	mInput->BindController(controller);
 	mInput->BindKey(EKey::A, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveLeft));
 	mInput->BindKey(EKey::A, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveLeftStopped));
-	mInput->BindKey(EKey::D, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveRight));
-	mInput->BindKey(EKey::D, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveRightStopped));
+	mInput->BindKey(EKey::F, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveRight));
+	mInput->BindKey(EKey::F, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveRightStopped));
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnJump));
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnJumpStopped));
 	
-	mSprite = AddComponent<CSpriteRenderer>();
-	mSprite->SetSprite("Content/Sprites/norm.png");
+	CShader* shader = CShader::Load("Content/Shader/SpriteVS.glsl", "Content/Shader/SpritePS.glsl");
+	CTexture* texture = new CTexture("Content/Sprites/diff.png");
+	CTexture* texture2 = new CTexture("Content/Sprites/norm.png");
+
+	CMaterial* material = new CMaterial(shader);
+	material->SetTexture(0, texture);
+	material->SetTexture(1, texture2);
+
+	mSprite = AddComponent<CComplexSpriteRenderer>();
+	mSprite->SetMaterial(material);
+
+	CSpriteRenderer* s = AddComponent<CSpriteRenderer>();
+	s->SetSprite("Content/Sprites/Character.png");
+	s->SetRelativePosition(TVec2(50, -100));
 
 	mCollider = AddComponent<CBoxCollider>();
 	mCollider->SetSize(100, 100);
@@ -33,7 +49,7 @@ Player::Player()
 
 Player::~Player()
 {
-	printf("osifdgsg");
+	
 }
 
 void Player::Update(float deltaTime)

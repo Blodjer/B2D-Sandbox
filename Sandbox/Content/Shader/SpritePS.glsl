@@ -5,15 +5,15 @@ layout(location = 0) out vec4 color;
 in vec3 Pos;
 in vec2 TexCoord;
 
-uniform sampler2D ourTexture;
-uniform sampler2D ourTextures;
+uniform sampler2D texture0;
+uniform sampler2D texture1;
 
 uniform float rotation;
 
 void main()
 {
-    vec4 d = texture(ourTextures, TexCoord);
-    vec3 n = texture(ourTexture, TexCoord).xyz;
+    vec4 d = texture(texture0, TexCoord);
+    vec3 n = texture(texture1, TexCoord).xyz;
     n.xy = n.xy * 2 - 1;
     n.z = n.z - 0.5;
 
@@ -23,7 +23,7 @@ void main()
     vec3 light = vec3(lightPos - TexCoord, 0.1);//vec3(sin(rotation), cos(rotation), 1);
     float f = dot(normalize(light), normalize(n.xyz));
 
-    color = vec4(d.xyz * max(f * g * vec3(1, 0.5, 4), 0.2), d.w); //texture(ourTexture, TexCoord);// * vec4(0.0, 1.0, 1.0, 1.0);
+    color = vec4(d.xyz * max(f * g * vec3(1, 0.5, 4), 0.2), d.w); //texture(texture0, TexCoord);// * vec4(0.0, 1.0, 1.0, 1.0);
 }
 
 //  X: -1 to +1 :  Red: 0 to 255
