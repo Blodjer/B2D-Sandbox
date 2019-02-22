@@ -28,7 +28,7 @@ Player::Player()
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnJump));
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnJumpStopped));
 	
-	CShader* shader = CShader::Load("Content/Shader/SpriteVS.glsl", "Content/Shader/SpritePS.glsl");
+	CShader* shader = CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SpritePS.glsl");
 	CTexture* texture = new CTexture("Content/Sprites/diff.png");
 	CTexture* texture2 = new CTexture("Content/Sprites/norm.png");
 
