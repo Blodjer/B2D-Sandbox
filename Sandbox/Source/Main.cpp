@@ -1,24 +1,38 @@
-#include "Core/GameEngine.h"
-#include "Core/GameInstance.h"
-#include "TestScene.h"
+#include "EntryPoint.h"
 
-#include <eh.h>
-#include <iostream>
+#include "Component/BoxCollider.h"
+#include "GameObject.h"
+#include "Level.h"
+#include "Player.h"
 
-#define _CRTDBG_MAP_ALLOC
-
-int main(int argc, const char*[])
+void B2D::Config(ApplicationConfig& config)
 {
-#if _DEBUG
-	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
-#endif
+	config.name = "Sandbox";
+}
 
-	auto engine = CGameEngine::Init();
+void B2D::PopulateLevel(CLevel* const level)
+{
+    Player* player = level->SpawnGameObject<Player>(TVec2(200, 400));
 
-	CGameInstance* const pGameInstance = engine->GetGameInstance();
-	pGameInstance->LoadLevel<TestScene>();
+    CGameObject* gameObject = level->SpawnGameObject(TVec2(500, 600));
+    CBoxCollider* collider = gameObject->AddComponent<CBoxCollider>();
+    collider->SetSize(600, 100);
 
-	engine->Start();
+    /*
+    auto start = std::chrono::high_resolution_clock::now();
 
-	return 0;
+    int m = 20;
+    for (int i = 0; i < m; i++)
+    {
+        Player* g = level->SpawnGameObject<Player>();
+
+        for (CComponent* const c : g->GetComponents())
+        {
+            c->SetRelativePosition(TVec2(UMath::RandomRange(-400, 400), UMath::RandomRange(-200, 200)));
+        }
+    }
+
+    std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - start;
+    B2D_INFO("Loading of {0} GameObjects took {1}s", m, elapsed.count());
+    */
 }
