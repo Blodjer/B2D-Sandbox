@@ -43,6 +43,7 @@ project "Sandbox"
 	location "Sandbox"
 	language "C++"
 	kind "ConsoleApp"
+	staticruntime "On"
 
 	files
 	{
@@ -52,7 +53,8 @@ project "Sandbox"
 	includedirs
 	{
 		"B2D/Source/",
-		"B2D/Libraries/glm/"
+		"B2D/Libraries/glm/",
+		"B2D/Libraries/spdlog/include/"
 	}
 
 	links

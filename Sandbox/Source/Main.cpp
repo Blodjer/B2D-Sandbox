@@ -4,25 +4,13 @@
 
 #include <eh.h>
 #include <iostream>
-#include <Windows.h>
 
-#if _DEBUG
-LONG WINAPI MyUnhandledExceptionFilter(PEXCEPTION_POINTERS pExceptionPtrs)
-{
-	static char msg[256];
-	sprintf_s(msg, 256, "Unhandled exception 0x%08x at 0x%08x",
-		pExceptionPtrs->ExceptionRecord->ExceptionCode,
-		pExceptionPtrs->ExceptionRecord->ExceptionAddress);
-	printf(msg);
-	getchar();
-	return EXCEPTION_EXECUTE_HANDLER;
-}
-#endif
+#define _CRTDBG_MAP_ALLOC
 
 int main(int argc, const char*[])
 {
 #if _DEBUG
-	SetUnhandledExceptionFilter(MyUnhandledExceptionFilter);
+	_CrtSetDbgFlag(_CRTDBG_ALLOC_MEM_DF | _CRTDBG_LEAK_CHECK_DF);
 #endif
 
 	auto engine = CGameEngine::Init();

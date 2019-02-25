@@ -10,6 +10,7 @@
 #include "Core/GameInstance.h"
 #include "Input.h"
 #include "PlayerController.h"
+#include "Core/Resource.h"
 
 // Derive from actor instead of GameObject
 // Actor should hold reference to its components but cannot be reused on another GameObject
@@ -29,8 +30,8 @@ Player::Player()
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnJumpStopped));
 	
 	CShader* shader = CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SpritePS.glsl");
-	CTexture* texture = new CTexture("Content/Sprites/diff.png");
-	CTexture* texture2 = new CTexture("Content/Sprites/norm.png");
+	ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
+	ResourcePtr<CTexture> texture2 = IResourceManager::Get<CTexture>("Content/Sprites/norm.png");
 
 	CMaterial* material = new CMaterial(shader);
 	material->SetTexture(0, texture);
