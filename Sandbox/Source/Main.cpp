@@ -12,9 +12,9 @@ void B2D::Config(ApplicationConfig& config)
 
 void B2D::PopulateLevel(CLevel* const level)
 {
-    Player* player = level->SpawnGameObject<Player>(TVec2(200, 400));
+    Player* player = level->SpawnGameObject<Player>();
 
-    CGameObject* gameObject = level->SpawnGameObject(TVec2(500, 600));
+    CGameObject* gameObject = level->SpawnGameObject();
     CBoxCollider* collider = gameObject->AddComponent<CBoxCollider>();
     collider->SetSize(600, 100);
 

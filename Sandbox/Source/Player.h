@@ -23,7 +23,7 @@ private:
 	void OnJump();
 	void OnJumpStopped();
 
-	float mMovementSpeed = 100.f; // 4
+	float mMovementSpeed = 10.f; // 4
 	float mMoveRigthtForce = 0.f; // 4
 	float mMoveLeftForce = 0.f;	 // 4
 

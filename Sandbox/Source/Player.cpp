@@ -24,8 +24,8 @@ Player::Player()
 	mInput->BindController(controller);
 	mInput->BindKey(EKey::A, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveLeft));
 	mInput->BindKey(EKey::A, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveLeftStopped));
-	mInput->BindKey(EKey::F, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveRight));
-	mInput->BindKey(EKey::F, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveRightStopped));
+	mInput->BindKey(EKey::D, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnMoveRight));
+	mInput->BindKey(EKey::D, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnMoveRightStopped));
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_DOWN, TKeyDelegate::CREATE(&Player::OnJump));
 	mInput->BindKey(EKey::SPACE, EKeyEvent::KEY_UP, TKeyDelegate::CREATE(&Player::OnJumpStopped));
 	
@@ -42,7 +42,7 @@ Player::Player()
 
 	CSpriteRenderer* s = AddComponent<CSpriteRenderer>();
 	s->SetSprite("Content/Sprites/Character.png");
-	s->SetRelativePosition(TVec2(50, -100));
+	s->SetRelativePosition(TVec3(0.5f, -1.0f, 0.0f));
 
 	mCollider = AddComponent<CBoxCollider>();
 	mCollider->SetSize(100, 100);
@@ -57,7 +57,7 @@ void Player::Update(float deltaTime)
 {
 	CGameObject::Update(deltaTime);
 
-	TVec2 position = GetPosition();
+	TVec3 position = GetPosition();
 	position.X += (mMoveRigthtForce - mMoveLeftForce) * mMovementSpeed * deltaTime;
 	SetPosition(position, true);
 }
@@ -84,8 +84,8 @@ void Player::OnMoveLeftStopped()
 
 void Player::OnJump()
 {
-	TVec2 position = GetPosition();
-	position.Y -= 50;
+	TVec3 position = GetPosition();
+	position.Y -= 1.0f;
 	SetPosition(position, true);
 	
 	printf("JUMP\n");
@@ -93,7 +93,7 @@ void Player::OnJump()
 
 void Player::OnJumpStopped()
 {
-	TVec2 position = GetPosition();
-	position.Y += 50;
+	TVec3 position = GetPosition();
+	position.Y += 1.0f;
 	SetPosition(position, true);
 }
