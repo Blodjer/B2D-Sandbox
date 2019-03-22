@@ -1,9 +1,12 @@
 #include "EntryPoint.h"
 
 #include "ECS/World.h"
+#include "ECS/Component/CharacterMovementComponent.h"
+#include "ECS/Component/HoverComponent.h"
+#include "ECS/Component/InputComponent.h"
 #include "ECS/Component/SpriteComponent.h"
 #include "ECS/Component/TransformComponent.h"
-#include "ECS/Component/HoverComponent.h"
+#include "ECS/Component/PawnComponent.h"
 
 void B2D::Config(ApplicationConfig& config)
 {
@@ -14,17 +17,26 @@ void B2D::PopulateWorld(World* const world)
 {
     auto start = std::chrono::high_resolution_clock::now();
 
-    int m = 400;
-
     //mWorld->AddSystemEntityObject<EcsPlayer>();
 
+    EntityID characterEntity = world->AddEntity<Entity>();
+    world->AddComponent<TransformComponent>(characterEntity, TVec3(0.0f, 0.0f, -2.0f));
+    world->AddComponent<InputComponent>(characterEntity);
+    world->AddComponent<PawnComponent>(characterEntity);
+    world->AddComponent<CharacterMovementComponent>(characterEntity);
+
+    ResourcePtr<CTexture> characterTexture = IResourceManager::Get<CTexture>("Content/Sprites/Character.png");
+    SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
+    spriteComponent->material.SetTexture(0, characterTexture);
+
+    int m = 100;
     for (int i = 0; i < m; i++)
     {
         EntityID entity = world->AddEntity<Entity>();
 
-        ResourcePtr<CTexture> textures = IResourceManager::Get<CTexture>("Content/Sprites/Character.png");
+        ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
         SpriteComponent* s = world->AddComponent<SpriteComponent>(entity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
-        s->material.SetTexture(0, textures);
+        s->material.SetTexture(0, texture);
 
         TransformComponent* t = world->AddComponent<TransformComponent>(entity);
         t->position = TVec3(UMath::RandomRange(-5.0f, 5.0f), UMath::RandomRange(-3.0f, 3.0f), UMath::RandomRange(-1.0f, 1.0f));
