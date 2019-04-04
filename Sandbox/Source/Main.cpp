@@ -1,12 +1,11 @@
 #include "EntryPoint.h"
 
-#include "ECS/World.h"
-#include "ECS/Component/CharacterMovementComponent.h"
-#include "ECS/Component/HoverComponent.h"
-#include "ECS/Component/InputComponent.h"
-#include "ECS/Component/SpriteComponent.h"
-#include "ECS/Component/TransformComponent.h"
-#include "ECS/Component/PawnComponent.h"
+#include "Game/Core/World.h"
+#include "Game/Component/CharacterMovementComponent.h"
+#include "Game/Component/HoverComponent.h"
+#include "Game/Component/InputComponent.h"
+#include "Game/Component/SpriteComponent.h"
+#include "Game/Component/TransformComponent.h"
 
 void B2D::Config(ApplicationConfig& config)
 {
@@ -22,14 +21,13 @@ void B2D::PopulateWorld(World* const world)
     EntityID characterEntity = world->AddEntity<Entity>();
     world->AddComponent<TransformComponent>(characterEntity, TVec3(0.0f, 0.0f, -2.0f));
     world->AddComponent<InputComponent>(characterEntity);
-    world->AddComponent<PawnComponent>(characterEntity);
     world->AddComponent<CharacterMovementComponent>(characterEntity);
 
     ResourcePtr<CTexture> characterTexture = IResourceManager::Get<CTexture>("Content/Sprites/Character.png");
     SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
     spriteComponent->material.SetTexture(0, characterTexture);
 
-    int m = 100;
+    int m = 5000;
     for (int i = 0; i < m; i++)
     {
         EntityID entity = world->AddEntity<Entity>();
