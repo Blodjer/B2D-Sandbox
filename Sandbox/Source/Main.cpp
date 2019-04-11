@@ -27,22 +27,25 @@ void B2D::PopulateWorld(World* const world)
     SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
     spriteComponent->material.SetTexture(0, characterTexture);
 
-    int m = 5000;
+    int m = 9900;
     for (int i = 0; i < m; i++)
     {
         EntityID entity = world->AddEntity<Entity>();
-
-        ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
-        SpriteComponent* s = world->AddComponent<SpriteComponent>(entity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
-        s->material.SetTexture(0, texture);
 
         TransformComponent* t = world->AddComponent<TransformComponent>(entity);
         t->position = TVec3(UMath::RandomRange(-5.0f, 5.0f), UMath::RandomRange(-3.0f, 3.0f), UMath::RandomRange(-1.0f, 1.0f));
         t->matrix = TMatrix::Translate(t->matrix, t->position);
         t->matrix = TMatrix::Scale(t->matrix, t->scale);
 
-        HoverComponent* h = world->AddComponent<HoverComponent>(entity);
-        h->speed = UMath::RandomRange(1.0f, 5.0f);
+        ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
+        SpriteComponent* s = world->AddComponent<SpriteComponent>(entity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
+        s->material.SetTexture(0, texture);
+
+        if (i < 1000)
+        {
+            HoverComponent* h = world->AddComponent<HoverComponent>(entity);
+            h->speed = UMath::RandomRange(1.0f, 5.0f);
+        }
     }
 
     std::chrono::duration<double> elapsed = std::chrono::high_resolution_clock::now() - start;
