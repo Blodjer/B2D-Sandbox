@@ -6,6 +6,7 @@
 #include "Game/Component/InputComponent.h"
 #include "Game/Component/SpriteComponent.h"
 #include "Game/Component/TransformComponent.h"
+#include "Graphics/Material.h"
 
 void B2D::Config(ApplicationConfig& config)
 {
@@ -23,9 +24,19 @@ void B2D::PopulateWorld(World* const world)
     world->AddComponent<InputComponent>(characterEntity);
     world->AddComponent<CharacterMovementComponent>(characterEntity);
 
+    VertexShaderRef defaultVS = IResourceManager::Get<VertexShader>("Content/Shader/DefaultVS.glsl");
+    PixelShaderRef simpleSpritePS = IResourceManager::Get<PixelShader>("Content/Shader/SimpleSpritePS.glsl");
+
     ResourcePtr<CTexture> characterTexture = IResourceManager::Get<CTexture>("Content/Sprites/Character.png");
-    SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
-    spriteComponent->material.SetTexture(0, characterTexture);
+    
+    Material* characterMaterial = new Material(defaultVS, simpleSpritePS);
+    characterMaterial->SetTexture(0, characterTexture);
+
+    SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, characterMaterial);
+
+    ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
+    Material* defaultMaterial = new Material(defaultVS, simpleSpritePS);
+    defaultMaterial->SetTexture(0, texture);
 
     int m = 9900;
     for (int i = 0; i < m; i++)
@@ -37,11 +48,9 @@ void B2D::PopulateWorld(World* const world)
         t->matrix = TMatrix::Translate(t->matrix, t->position);
         t->matrix = TMatrix::Scale(t->matrix, t->scale);
 
-        ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
-        SpriteComponent* s = world->AddComponent<SpriteComponent>(entity, CShader::Load("Content/Shader/DefaultVS.glsl", "Content/Shader/SimpleSpritePS.glsl"));
-        s->material.SetTexture(0, texture);
+        SpriteComponent* s = world->AddComponent<SpriteComponent>(entity, defaultMaterial);
 
-        if (i < 1000)
+        if (i < 500)
         {
             HoverComponent* h = world->AddComponent<HoverComponent>(entity);
             h->speed = UMath::RandomRange(1.0f, 5.0f);
