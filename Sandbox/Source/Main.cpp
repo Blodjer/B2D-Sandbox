@@ -34,7 +34,7 @@ void B2D::PopulateWorld(World* const world)
 
     SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, characterMaterial);
 
-    ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/diff.png");
+    ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/SuccessKid.png");
     Material* defaultMaterial = new Material(defaultVS, simpleSpritePS);
     defaultMaterial->SetTexture(0, texture);
 
