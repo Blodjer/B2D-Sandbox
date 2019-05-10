@@ -32,28 +32,28 @@ void B2D::PopulateWorld(World* const world)
     Material* characterMaterial = new Material(defaultVS, simpleSpritePS);
     characterMaterial->SetTexture(0, characterTexture);
 
-    SpriteComponent* spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, characterMaterial);
+    SpriteComponent& spriteComponent = world->AddComponent<SpriteComponent>(characterEntity, characterMaterial);
 
     ResourcePtr<CTexture> texture = IResourceManager::Get<CTexture>("Content/Sprites/SuccessKid.png");
     Material* defaultMaterial = new Material(defaultVS, simpleSpritePS);
     defaultMaterial->SetTexture(0, texture);
 
-    int m = 9900;
+    int m = 10000;
     for (int i = 0; i < m; i++)
     {
         EntityID entity = world->AddEntity<Entity>();
 
-        TransformComponent* t = world->AddComponent<TransformComponent>(entity);
-        t->position = TVec3(UMath::RandomRange(-5.0f, 5.0f), UMath::RandomRange(-3.0f, 3.0f), UMath::RandomRange(-1.0f, 1.0f));
-        t->matrix = TMatrix::Translate(t->matrix, t->position);
-        t->matrix = TMatrix::Scale(t->matrix, t->scale);
+        TransformComponent& t = world->AddComponent<TransformComponent>(entity);
+        t.position = TVec3(UMath::RandomRange(-5.0f, 5.0f), UMath::RandomRange(-3.0f, 3.0f), UMath::RandomRange(-1.0f, 1.0f));
+        t.matrix = TMatrix::Translate(t.matrix, t.position);
+        t.matrix = TMatrix::Scale(t.matrix, t.scale);
 
-        SpriteComponent* s = world->AddComponent<SpriteComponent>(entity, defaultMaterial);
+        SpriteComponent& s = world->AddComponent<SpriteComponent>(entity, defaultMaterial);
 
         if (i < 500)
         {
-            HoverComponent* h = world->AddComponent<HoverComponent>(entity);
-            h->speed = UMath::RandomRange(1.0f, 5.0f);
+            HoverComponent& h = world->AddComponent<HoverComponent>(entity);
+            h.speed = UMath::RandomRange(1.0f, 5.0f);
         }
     }
 
