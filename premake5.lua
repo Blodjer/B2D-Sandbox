@@ -6,7 +6,6 @@ project "Sandbox"
 	location "Sandbox"
 	language "C++"
 	kind "ConsoleApp"
-	staticruntime "On"
 
 	files
 	{

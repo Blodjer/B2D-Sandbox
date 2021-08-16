@@ -1,10 +1,10 @@
-#version 410 core
+#version 450 core
 
 layout(location = 0) in vec3 position;
 layout(location = 1) in vec2 aTexCoord;
 
-out vec3 Pos;
-out vec2 TexCoord;
+layout(location = 0) out vec3 Pos;
+layout(location = 1) out vec2 TexCoord;
 
 uniform mat4 model;
 uniform mat4 viewprojection;

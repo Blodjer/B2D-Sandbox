@@ -1,12 +1,12 @@
-#version 410 core
+#version 450 core
 
 layout(location = 0) out vec4 color;
 
-in vec3 Pos;
-in vec2 TexCoord;
+layout(location = 0) in vec3 Pos;
+layout(location = 1) in vec2 TexCoord;
 
-uniform sampler2D texture0;
-uniform sampler2D texture1;
+layout(binding = 0) uniform sampler2D texture0;
+layout(binding = 1) uniform sampler2D texture1;
 
 uniform float rotation;
 

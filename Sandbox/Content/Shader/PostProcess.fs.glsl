@@ -1,10 +1,10 @@
-#version 410 core
+#version 450 core
 
 layout(location = 0) out vec4 color;
 
-in vec2 TexCoord;
+layout(location = 0) in vec2 TexCoord;
 
-uniform sampler2D texture0;
+layout(binding = 0) uniform sampler2D texture0;
 
 void main()
 {
